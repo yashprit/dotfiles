@@ -5,36 +5,100 @@
 " =======================================================
 " Best view with a 256 color terminal and Powerline fonts
 
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-Bundle 'tpope/vim-surround'
-Bundle 'gcmt/breeze.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'bling/vim-airline'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'scrooloose/nerdtree'
+" set the runtime path to include Vundle and initialize
 
-" Color Themes
-Bundle 'flazz/vim-colorschemes'
-colorscheme Monokai
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'L9'
+
+"font plugin
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/binding/vim'}
+
+"color scheme
+Plugin 'altercation/vim-colors-solarized'
+
+Plugin 'tpope/vim-surround'
+Plugin 'gcmt/breeze.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'tomtom/tcomment_vim'
+
+"status/tabline for vim
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
+
+"JS Syntax
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'nathanaelkane/vim-indent-guides'
+
+"Git neerd tree
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+Plugin 'airblade/vim-gitgutter'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/nerdtree'
+
+" automatically add the closing quote
+Plugin 'Raimondi/delimitMate'
+
+"Linting JS 
+Plugin 'scrooloose/syntastic'
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+"Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 if has('autocmd')
-  filetype plugin indent on
+	filetype plugin indent on
 endif
+
 if has('syntax') && !exists('g:syntax_on')
-  syntax enable
+	syntax enable
 endif
+
+" Linting Option
+let g:syntastic_check_on_open=1
 
 " Use :help 'option' to see the documentation for the given option.
 set autoindent
@@ -43,27 +107,21 @@ set complete-=i
 set showmatch
 set showmode
 set smarttab
-
 set nrformats-=octal
 set shiftround
-
 set ttimeout
 set ttimeoutlen=50
-
 set incsearch
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+    nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
 
 set laststatus=2
-set ruler
 set showcmd
 set wildmenu
-
 set autoread
-
 set encoding=utf-8
 set tabstop=2 shiftwidth=2 expandtab
 set listchars=tab:▒░,trail:▓
@@ -72,18 +130,16 @@ set list
 let g:nerdtree_tabs_open_on_gui_startup = 1
 
 inoremap <C-U> <C-G>u<C-U>
-
-set number
 set hlsearch
 set ignorecase
 set smartcase
 
-" Don't use Ex mode, use Q for formatting
+"Don't use Ex mode, use Q for formatting
 map Q gq
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
-  set mouse=a
+    set mouse=a
 endif
 
 " do not history when leavy buffer
@@ -93,62 +149,62 @@ set hidden
 noremap  <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <Esc>:update<CR>
-
+	
 set nobackup
 set nowritebackup
 set noswapfile
 set fileformats=unix,dos,mac
 
 set guifont=Liberation\ Mono\ for\ Powerline\ 10 
-
+	
 " exit insert mode 
 inoremap <C-c> <Esc>
-
+	
 set completeopt=menuone,longest,preview
-
-"
-" Plugins config
-"
-
+	
 " CtrlP
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/* 
-
+	
 " Ultisnip
 " NOTE: <f1> otherwise it overrides <tab> forever
 let g:UltiSnipsExpandTrigger="<f1>"
 let g:UltiSnipsJumpForwardTrigger="<f1>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:did_UltiSnips_vim_after = 1
-
+	
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-
-"
+	
 " Basic shortcuts definitions
 "  most in visual mode / selection (v or ⇧ v)
-"
 
 " Find
 map <C-f> /
+
 " indend / deindent after selecting the text with (⇧ v), (.) to repeat.
 vnoremap <Tab> >
 vnoremap <S-Tab> <
+
 " comment / decomment & normal comment behavior
 vmap <C-m> gc
+
 " Disable tComment to escape some entities
 let g:tcomment#replacements_xml={}
-" Text wrap simpler, then type the open tag or ',"
+	"     " Text wrap simpler, then type the open tag or ',"
 vmap <C-w> S
+
 " Cut, Paste, Copy
 vmap <C-x> d
 vmap <C-v> p
 vmap <C-c> y
+
 " Undo, Redo (broken)
 nnoremap <C-z>  :undo<CR>
 inoremap <C-z>  <Esc>:undo<CR>
 nnoremap <C-y>  :redo<CR>
 inoremap <C-y>  <Esc>:redo<CR>
+
 " Tabs
 let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled = 1
@@ -161,6 +217,19 @@ nnoremap <C-t>  :tabnew<CR>
 inoremap <C-t>  <Esc>:tabnew<CR>i
 nnoremap <C-k>  :tabclose<CR>
 inoremap <C-k>  <Esc>:tabclose<CR>i
+	
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
 
 set guifont=Inconsolata\ for\ Powerline:h15
 let g:Powerline_symbols = 'fancy'
@@ -169,14 +238,13 @@ set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
-
+	
 if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+	let g:airline_symbols = {}
 endif
-
+	
 " lazy ':'
 map \ :
-
 let mapleader = ','
 nnoremap <Leader>p :set paste<CR>
 nnoremap <Leader>o :set nopaste<CR>
@@ -184,14 +252,25 @@ noremap  <Leader>g :GitGutterToggle<CR>
 
 " this machine config
 if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+	source ~/.vimrc.local
 endif
 
-" for macvim
+
+" Some settings to enable the theme:
+set bs=2
+set ts=4
+set sw=4
+" shows row and column number at bottom right corner
+
+set ruler
+set number        " Show line numbers
+syntax enable     " Use syntax highlighting
+set background=dark
+colorscheme solarized
+
 if has("gui_running")
   let s:uname = system("uname")
   if s:uname == "Darwin\n"
     set guifont=Inconsolata\ for\ Powerline:h15
-    autocmd vimenter * NERDTree
   endif
 endif
